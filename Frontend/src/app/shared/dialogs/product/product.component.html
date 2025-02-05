@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="container-header">
+    <h1>{{title}}</h1>
+    <button mat-icon-button mat-dialog-close style="width: 50px; height: 50px;"><mat-icon>close</mat-icon></button>
+  </div>
+<div style="padding: 10px;">
+  <mat-form-field style="width: 100%;">
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="product.name" matInput placeholder="Name" #input>
+  </mat-form-field>
+  <mat-form-field style="width: 100%;">
+    <mat-label>Price</mat-label>
+    <input [(ngModel)]="product.price" matInput placeholder="Price" #input>
+  </mat-form-field>
+</div>
+<div>
+  <div mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close color="primary" (click)="Insert()"><mat-icon>save</mat-icon>Save</button>
+  </div>
+</div>

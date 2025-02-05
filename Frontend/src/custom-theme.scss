@@ -1,0 +1,45 @@
+@import '@angular/material/theming';
+
+$ALA-Blue: (
+    50: #d8e8fd, //Standard light
+   100: #b9d2f8,
+   200: #9abcd4,
+   300: #7c87b0,
+   400: #5d62ac,
+   500: #3478f6, //Standard light intermediate, Impact Blue
+   600: #2c5ec5,
+   700: #1c377b, //Standard dark intermediate, Heritage Blue
+   800: #162c5f,
+   900: #02092f, //Standard darker
+   A50: #efdffd,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffffff,
+  A700: #ffffff,
+  contrast: (
+     50: rgba(#000000, 0.87),
+    100: rgba(#000000, 0.87),
+    200: rgba(#000000, 0.87),
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+  )
+);
+
+$custom-primary: mat-palette($ALA-Blue, 700);
+$custom-accent: mat-palette($ALA-Blue, 500);
+$custom-warn: mat-palette($ALA-Blue, 50);
+
+$my-app-theme: mat-light-theme((
+  color: (
+    primary: $custom-primary,
+    accent: $custom-accent,
+    warn: $custom-warn
+  )
+));
+
+@include angular-material-theme($my-app-theme);

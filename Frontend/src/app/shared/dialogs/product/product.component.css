@@ -1,0 +1,14 @@
+.mat-mdc-dialog-actions {
+  justify-content: space-between;
+}
+
+.container {
+  padding: 10px;
+}
+
+.container-header {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}

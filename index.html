@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>The Alfa Laval Code Challenge</title>
+  <style>
+    :root {
+      --alfa-navy: #00205B;
+      --alfa-midblue: #005293;
+      --alfa-lightblue: #71C5E8;
+      --text-color: #333;
+      --bg-color: #f2f2f2;
+      --white: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    header {
+      background: var(--alfa-navy);
+      color: var(--white);
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: normal;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 20px auto;
+      background: var(--white);
+      border-radius: 5px;
+      padding: 20px;
+    }
+
+    main h1 {
+      margin-top: 0;
+      color: var(--alfa-navy);
+      font-size: 1.6rem;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      color: var(--alfa-midblue);
+      margin-top: 0;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    p,
+    ul,
+    ol {
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+
+    ul ul {
+      list-style-type: circle;
+      margin-left: 20px;
+    }
+
+    code {
+      background-color: #eee;
+      padding: 2px 4px;
+      font-size: 90%;
+      border-radius: 3px;
+    }
+
+    footer {
+      background: var(--alfa-midblue);
+      text-align: center;
+      padding: 15px;
+      color: var(--white);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>The Alfa Laval Code Challenge</h1>
+  </header>
+
+  <main>
+    <h1>Code Challenge</h1>
+    <p>O objetivo deste teste é avaliar suas habilidades em desenvolvimento backend (<strong>.NET</strong>), frontend
+      (<strong>Angular</strong>) e visualização de dados (<strong>Power BI</strong>). Leia atentamente até o fim das
+      instruções.</p>
+    <p>O projeto base pode ser encontrado em:
+      <a href="https://github.com/senhorbento/ALA-Code-Challenge-2025" target="_blank">
+        https://github.com/senhorbento/ALA-Code-Challenge-2025
+      </a>
+    </p>
+
+    <div class="section">
+      <h2>1️⃣ Desafio Backend - API REST com C# (.NET Core e SQLite)</h2>
+      <p><strong>Requisitos:</strong></p>
+      <p>Tenha em mente as seguinte tabelas:</p>
+      <ul>
+        <li><strong>User</strong>
+          <ul>
+            <li>id - INT</li>
+            <li>email – TEXT</li>
+            <li>password - TEXT</li>
+            <li>name - TEXT</li>
+          </ul>
+        </li>
+        <li><strong>Product</strong>
+          <ul>
+            <li>id - INT</li>
+            <li>name - TEXT</li>
+            <li>price - DECIMAL</li>
+          </ul>
+        </li>
+        <li><strong>Purchase</strong>
+          <ul>
+            <li>id - INT</li>
+            <li>userID - INT</li>
+            <li>orderDate - DATETIME</li>
+            <li>total - DECIMAL</li>
+          </ul>
+        </li>
+      </ul>
+      <p>Implemente os endpoints para <strong>User</strong> e <strong>Purchase</strong> (CRUD), tomando como base os
+        endpoints de <strong>Product</strong> já existentes.</p>
+      <p><strong>Diferencial:</strong></p>
+      <ul>
+        <li>Na listagem de <strong>Purchase</strong>, retornar além do <em>ID</em> o <em>user name</em>.</li>
+        <li>Adicionar diferenciação para <strong>Administrador</strong> e <strong>Cliente</strong> ao user.</li>
+      </ul>
+      <p>Observação: Fique atento à segurança para armazenamento e manipulação de senhas. Organize a estrutura do
+        projeto de forma clara e escalável.</p>
+    </div>
+
+    <div class="section">
+      <h2>2️⃣ Desafio Frontend - Aplicação Angular Simples</h2>
+      <p><strong>Requisitos:</strong></p>
+      <ul>
+        <li>Criar uma página de criação de usuários.</li>
+        <li>Listar todos os usuários vindos da API.</li>
+        <li>Permitir adicionar um novo usuário.</li>
+        <li>Permitir editar um usuário existente.</li>
+        <li>Criar uma página de <strong>purchase</strong> geral:
+          <ul>
+            <li>Listar todos vindos da API.</li>
+            <li>Permitir adicionar um novo <strong>purchase</strong>.</li>
+          </ul>
+        </li>
+      </ul>
+      <p><strong>Diferencial:</strong></p>
+      <ul>
+        <li>Criar uma tela de <strong>Purchase</strong> que filtra somente as compras do usuário logado.</li>
+        <li>Diferentes visualizações para <strong>Cliente</strong> e <strong>Administrador</strong>.</li>
+      </ul>
+      <p>Observação: Estruture a aplicação Angular de forma organizada (componentes, serviços, rotas), pensando em boas
+        práticas de arquitetura.</p>
+    </div>
+
+    <div class="section">
+      <h2>3️⃣ Desafio Power BI - Dashboard</h2>
+      <p>Você deverá utilizar <strong>Power BI</strong> para criar um dashboard com base no banco de dados criado no
+        desafio backend.</p>
+      <p><strong>Tarefa:</strong></p>
+      <ul>
+        <li><strong>Base de dados:</strong> Utilize o banco <strong>SQLite</strong> criado no desafio backend.</li>
+        <li><strong>Importação no Power BI:</strong> Carregue os dados no <strong>Power BI</strong> e crie um modelo de
+          relacionamento entre as tabelas (User, Product e Purchase).</li>
+        <li><strong>Criar os seguintes gráficos:</strong>
+          <ul>
+            <li>Mostrar os produtos mais vendidos.</li>
+            <li>Distribuição de pedidos por usuário.</li>
+            <li>Evolução dos pedidos ao longo do tempo.</li>
+          </ul>
+        </li>
+        <li><strong>Criar medidas DAX:</strong>
+          <ul>
+            <li>Total de vendas.</li>
+            <li>Média de pedidos por usuário.</li>
+            <li>Ticket médio.</li>
+          </ul>
+        </li>
+        <li><strong>Criar segmentação de dados</strong> para filtrar por período e usuário.</li>
+      </ul>
+      <p><strong>Diferencial:</strong> Utilizar as cores da Alfa Laval.</p>
+      <p>Observação: Pense em um layout de dashboard que seja claro e direto, exibindo indicadores de forma intuitiva.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>📩 Como enviar</h2>
+      <ol>
+        <li>Realize um Fork do projeto:
+          <a href="https://github.com/senhorbento/ALA-Code-Challenge-2025" target="_blank">
+            https://github.com/senhorbento/ALA-Code-Challenge-2025
+          </a>
+        </li>
+        <li>Crie um branch com a sua solução (<code>git checkout -b seu-nome/solucao</code>)</li>
+        <li>Realize o Commit (<code>git commit -m "Solução de fulano de tal"</code>)</li>
+        <li>Realize o Push no Branch (<code>git push origin seu-nome/solucao</code>)</li>
+        <li>Abra um Pull Request</li>
+        <li>Envie o link junto com o seu currículo para a página de inscrição da vaga.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>🔹 Critérios de avaliação:</h2>
+      <ul>
+        <li>Organização do código e estrutura do projeto.</li>
+        <li>Clareza do código.</li>
+        <li>Qualidade da implementação.</li>
+        <li>Criatividade e diferenciais aplicados.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <p>Se precisar de ajuda entre em contato através do nosso discord:
+        <a href="https://discord.gg/bxsaGxsBUp" target="_blank">https://discord.gg/bxsaGxsBUp</a>
+      </p>
+      <p>🚀 Boa sorte!</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Alfa Laval</p>
+  </footer>
+</body>
+
+</html>
