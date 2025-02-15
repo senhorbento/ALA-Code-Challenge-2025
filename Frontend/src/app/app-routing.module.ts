@@ -8,9 +8,10 @@ import { AuthGuard } from './core/guard/auth-guard';
 
 const routes: Routes = [
   { path: '', component: LoginPage },
-  { path: 'button', component: ButtonPage, canActivate: [AuthGuard], data: { roles: ['user'] } },
-  { path: 'dropdownbutton/foo', component: FooPage, canActivate: [AuthGuard], data: { roles: ['user'] } },
-  { path: 'dropdownbutton/bar', component: BarPage, canActivate: [AuthGuard], data: { roles: ['user'] } },
+  { path: 'button', component: ButtonPage, canActivate: [AuthGuard], data: { roles: ['admin',  'user'] } },
+  { path: 'dropdownbutton/foo', component: FooPage, canActivate: [AuthGuard], data: { roles: ['admin'] } },
+  { path: 'dropdownbutton/bar', component: BarPage, canActivate: [AuthGuard], data: { roles: ['admin'] } },
+  
 ];
 
 @NgModule({

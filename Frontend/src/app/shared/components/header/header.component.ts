@@ -13,12 +13,11 @@ export class HeaderComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.user = this.userService.getCurrentUser();
-    this.accessLevel = this.userService.getCurrentAccessLevel();
+    this.user = this.userService.GetCurrentUser();
   }
 
   Logout() {
-    this.userService.Logout();
+    this.userService.logout();
     this.router.navigate(['']);
   }
 

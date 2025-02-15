@@ -5,5 +5,6 @@ export class Constants {
 
   static PRODUCT : string = `${this.BASE_URL}/Product`;
   static USER : string = `${this.BASE_URL}/User`;
+  static  PURCHASE: string = `${this.BASE_URL}/Purchase`; 
 }
 
