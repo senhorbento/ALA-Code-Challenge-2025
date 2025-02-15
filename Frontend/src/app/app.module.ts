@@ -26,6 +26,9 @@ import { BarPage } from './shared/pages/bar-page/bar-page';
 import { MatDialogModule } from '@angular/material/dialog';
 import { GenericDialog } from './shared/dialogs/generic-dialog/generic-dialog';
 import { ProductComponent } from './shared/dialogs/product/product.component';
+import { UserDialogComponent } from './shared/dialogs/user/user-dialog.component';
+import { UserPageComponent } from './shared/dialogs/user/user-page.component';
+import {  MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,8 @@ import { ProductComponent } from './shared/dialogs/product/product.component';
     BarPage,
     ProductComponent,
     GenericDialog,
+    UserPageComponent,
+    UserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,8 @@ import { ProductComponent } from './shared/dialogs/product/product.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    MatOptionModule
   ],
   providers: [
     HTTPService,

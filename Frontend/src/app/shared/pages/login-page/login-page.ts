@@ -22,8 +22,8 @@ export class LoginPage {
   ngOnInit(): void { }
 
   CheckBlank() {
-    if (!this.user.user) {
-      this.snackBar.open("User Cannot Be Blank", true);
+    if (!this.user.email) { 
+      this.snackBar.open("Email Cannot Be Blank", true);
       return true;
     }
     if (!this.user.password) {

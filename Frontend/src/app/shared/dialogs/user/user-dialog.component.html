@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Editar Usuário' : 'Adicionar Usuário' }}</h2>
+
+<div mat-dialog-content>
+  <mat-form-field style="width: 100%;">
+    <mat-label>Nome</mat-label>
+    <input [(ngModel)]="user.name" matInput placeholder="Nome">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Email</mat-label>
+    <input [(ngModel)]="user.email" type="email" matInput placeholder="Email">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Senha</mat-label>
+    <input [(ngModel)]="user.password" type="password" matInput placeholder="Senha">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Perfil</mat-label>
+    <mat-select [(ngModel)]="user.role">
+      <mat-option value="user">Usuário</mat-option>
+      <mat-option value="admin">Administrador</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="save()">Salvar</button>
+  <button mat-button mat-dialog-close>Cancelar</button>
+</div>

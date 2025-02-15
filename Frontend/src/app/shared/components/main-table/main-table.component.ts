@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/core/models/Product';
+import { Purchase } from 'src/app/core/models/Purchase'; 
 import { ProductService } from 'src/app/core/services/ProductService';
+import { PurchaseService } from 'src/app/core/services/PurchaseService'; 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductComponent } from 'src/app/shared/dialogs/product/product.component';
+import { ProductComponent } from 'src/app/shared/dialogs/product/product.component'; 
 
 @Component({
   selector: 'app-main-table',
@@ -14,58 +16,97 @@ import { ProductComponent } from 'src/app/shared/dialogs/product/product.compone
 })
 
 export class MainTableComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'price', 'Edit', 'Delete'];
-  productList: MatTableDataSource<Product> = new MatTableDataSource<Product>;
-  pageSizes: number[] = [25, 50, 100];
-  length: number = 0;
+  displayedColumnsProducts: string[] = ['id', 'name', 'price', 'Edit', 'Delete'];
+  displayedColumnsPurchases: string[] = ['id', 'userID', 'orderDate', 'total', 'Edit', 'Delete']; 
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  constructor(private productService: ProductService, private dialog: MatDialog) { }
+  productList: MatTableDataSource<Product> = new MatTableDataSource<Product>();
+  purchaseList: MatTableDataSource<Purchase> = new MatTableDataSource<Purchase>(); 
+
+  pageSizes: number[] = [25, 50, 100];
+  productLength: number = 0;
+  purchaseLength: number = 0;
+
+  @ViewChild('productPaginator') productPaginator!: MatPaginator; 
+  @ViewChild('purchasePaginator') purchasePaginator!: MatPaginator;
+
+  @ViewChild(MatSort) sort!: MatSort; 
+
+  constructor(
+    private productService: ProductService,
+    private purchaseService: PurchaseService, 
+    private dialog: MatDialog
+  ) { }
+
   ngOnInit(): void {
-    this.refresh();
+    this.refreshProducts();
+    this.refreshPurchases();
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event, isPurchase: boolean) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.productList.filter = filterValue.trim().toLowerCase();
+    const dataSource = isPurchase ? this.purchaseList : this.productList;
 
-    if (this.productList.paginator) {
-      this.productList.paginator.firstPage();
+    dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (dataSource.paginator) {
+      dataSource.paginator.firstPage();
     }
   }
 
-  refresh() {
+  refreshProducts() {
     this.productService.GetList().subscribe({
       next: data => {
         this.productList = new MatTableDataSource(data);
-        this.productList.paginator = this.paginator;
+        this.productList.paginator = this.productPaginator; 
         this.productList.sort = this.sort;
-        this.length = this.productList._filterData.length;
-        if (length > 100)
-          this.pageSizes = [...this.pageSizes, length]
-        console.log(this.productList);
+        this.productLength = this.productList._filterData.length;
+        this.adjustPageSizes(this.productLength);
+        console.log("Products:", this.productList.data);
       },
-      error: error => {
-        console.log(error);
-      },
-      complete: () => { }
+      error: error => console.error("Error loading products:", error)
     });
   }
 
-  insert = () => this.openDialog("Insert Product");
+  refreshPurchases() {
+    this.purchaseService.GetList().subscribe({ 
+      next: data => {
+        this.purchaseList = new MatTableDataSource(data);
+        this.purchaseList.paginator = this.purchasePaginator; 
+        this.purchaseList.sort = this.sort;
+        this.purchaseLength = this.purchaseList._filterData.length;
+        this.adjustPageSizes(this.purchaseLength);
+        console.log("Purchases:", this.purchaseList.data);
+      },
+      error: error => console.error("Error loading purchases:", error)
+    });
+  }
 
-  edit = (obj: Product) => this.openDialog("Edit Product", obj);
+  adjustPageSizes(length: number) {
+    if (length > 100 && !this.pageSizes.includes(length)) {
+      this.pageSizes = [...this.pageSizes, length];
+    }
+  }
 
-  remove = (id: string) => console.log("remove" + id);
+  insertProduct = () => this.openDialog("Insert Product", undefined, true); 
+  insertPurchase = () => this.openDialog("Insert Purchase", undefined, false);
 
-  openDialog(title: string, object?: Product) {
-    this.dialog.open(ProductComponent, {
+  editProduct = (obj: Product) => this.openDialog("Edit Product", obj, true); 
+  editPurchase = (obj: Purchase) => this.openDialog("Edit Purchase", obj, false); 
+
+  removeProduct = (id: number) => console.log("remove Product" + id);
+  removePurchase = (id: number) => console.log("remove Purchase" + id);
+
+  openDialog(title: string, object?: Product | Purchase, isPurchase: boolean = true) {
+    this.dialog.open(ProductComponent, { 
       disableClose: true,
       data: {
         title: title,
-        object: object
+        object: object,
+        isPurchase: isPurchase 
       }
+    }).afterClosed().subscribe(() => {
+      this.refreshProducts();
+      this.refreshPurchases();
     });
   }
 }
